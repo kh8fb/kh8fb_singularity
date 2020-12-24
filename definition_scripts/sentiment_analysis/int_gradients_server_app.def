@@ -1,0 +1,212 @@
+BootStrap: debootstrap
+OSVersion: buster
+MirrorURL: http://ftp.us.debian.org/debian/
+
+%setup
+	# touch all possible files that can be downloaded
+	touch ${SINGULARITY_ROOTFS}/bert_imdb_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/bert_yelp_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/bert_sst_sentences_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/bert_sst_finetuned_model_file.pth
+	
+	touch ${SINGULARITY_ROOTFS}/xlnet_base_imdb_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_base_yelp_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_base_sst_sentences_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_base_sst_finetuned_model_file.pth
+	
+	touch ${SINGULARITY_ROOTFS}/xlnet_large_imdb_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_large_yelp_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_large_sst_sentences_model_file.pth
+	touch ${SINGULARITY_ROOTFS}/xlnet_large_sst_finetuned_model_file.pth
+
+%post
+	#install all necessary python material, remove unnecessary apps
+	apt-get update && apt-get install -y \
+	python3 \
+	python3-pip \
+	git-all \
+
+	pip3 install --upgrade pip
+	# get the intermediate gradients and server git repos
+	git clone https://github.com/kh8fb/intermediate-gradients.git
+	git clone https://github.com/kh8fb/int-gradients-server.git
+	cd intermediate-gradients
+	pip3 install -e .
+	cd ../int-gradients-server
+	pip3 install -r requirements.txt
+	pip3 install -e .
+	# download the google drive file
+	pip3 install gdown
+
+
+%labels
+	Author kh8fb@virginia.edu
+	Version v0.0.1
+
+#############
+# bert_imdb #
+#############
+
+%apphelp bert_imdb
+	This is an application which downloads the BERT Large ITPT Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall bert_imdb
+gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/bert_imdb_model_file.pth
+
+%apprun bert_imdb
+	echo "Arguments received: $*"
+     	intgrads -bp ${SINGULARITY_ROOTFS}/bert_imdb_model_file.pth --cpu $* 
+
+#############
+# bert_yelp #
+#############
+
+%apphelp bert_yelp
+	This is an application which downloads the BERT Large ITPT Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall bert_yelp
+gdown https://drive.google.com/uc?id=1h7jmjlPl6KPqVHhQo9FnVpZtg2h-14-7 -O ${SINGULARITY_ROOTFS}/bert_yelp_model_file.pth
+
+%apprun bert_yelp
+	echo "Arguments received: $*"
+     	intgrads -bp ${SINGULARITY_ROOTFS}/bert_yelp_model_file.pth --cpu $* 
+
+######################
+# bert_sst_sentences #
+######################
+
+%apphelp bert_sst_sentences
+	This is an application which downloads the BERT Large ITPT Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall bert_sst_sentences
+gdown https://drive.google.com/uc?id=1XSeRl5dHCAabB-gTbhYiZVO3JsA4OixJ -O ${SINGULARITY_ROOTFS}/bert_sst_sentences_model_file.pth
+
+%apprun bert_sst_sentences
+	echo "Arguments received: $*"
+     	intgrads -bp ${SINGULARITY_ROOTFS}/bert_sst_sentences_model_file.pth --cpu $* 
+
+######################
+# bert_sst_finetuned #
+######################
+
+%apphelp bert_sst_finetuned
+	This is an application which downloads the BERT Large ITPT Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall bert_sst_finetuned
+gdown https://drive.google.com/uc?id=19gRGkWKA4-pOH-TTQG5wEmA2wwtOOFoi -O ${SINGULARITY_ROOTFS}/bert_sst_finetuned_model_file.pth
+
+%apprun bert_sst_finetuned
+	echo "Arguments received: $*"
+     	intgrads -bp ${SINGULARITY_ROOTFS}/bert_sst_finetuned_model_file.pth --cpu $* 
+
+###################
+# xlnet_base_imdb #
+###################
+
+%apphelp xlnet_base_imdb
+	This is an application which downloads the XLNet Base Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_base_imdb
+gdown https://drive.google.com/uc?id=1mTfHTA5kdlQLFRtLGZPRTLHTB8nNL-du -O ${SINGULARITY_ROOTFS}/xlnet_base_imdb_model_file.pth
+
+%apprun xlnet_base_imdb
+	echo "Arguments received: $*"
+     	intgrads -xlb ${SINGULARITY_ROOTFS}/xlnet_base_imdb_model_file.pth --cpu $* 
+
+###################
+# xlnet_base_yelp #
+###################
+
+%apphelp xlnet_base_yelp
+	This is an application which downloads the XLNet Base Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_base_yelp
+gdown https://drive.google.com/uc?id=1M63fFr4sAhrZ-mNdIJdU8tRUxhzkeQ7j -O ${SINGULARITY_ROOTFS}/xlnet_base_yelp_model_file.pth
+
+%apprun xlnet_base_yelp
+	echo "Arguments received: $*"
+     	intgrads -xlb ${SINGULARITY_ROOTFS}/xlnet_base_yelp_model_file.pth --cpu $*
+
+############################
+# xlnet_base_sst_sentences #
+############################
+
+%apphelp xlnet_base_sst_sentences
+	This is an application which downloads the XLNet Base Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_base_sst_sentences
+gdown https://drive.google.com/uc?id=18fr8RLFiakDrFf24Dxsw88Uypqfp0B_b -O ${SINGULARITY_ROOTFS}/xlnet_base_sst_sentences_model_file.pth
+
+%apprun xlnet_base_sst_sentences
+	echo "Arguments received: $*"
+     	intgrads -xlb ${SINGULARITY_ROOTFS}/xlnet_base_sst_sentences_model_file.pth --cpu $* 
+
+############################
+# xlnet_base_sst_finetuned #
+############################
+
+%apphelp xlnet_base_sst_finetuned
+	This is an application which downloads the XLNet Base Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_base_sst_finetuned
+gdown https://drive.google.com/uc?id=1K7u0nGi5Ecc8g4A8KEgngDpRs6X5n0Dm -O ${SINGULARITY_ROOTFS}/xlnet_base_sst_finetuned_model_file.pth
+
+%apprun xlnet_base_sst_finetuned
+	echo "Arguments received: $*"
+     	intgrads -xlb ${SINGULARITY_ROOTFS}/xlnet_base_sst_finetuned_model_file.pth --cpu $* 
+
+####################
+# xlnet_large_imdb #
+####################
+
+%apphelp xlnet_large_imdb
+	This is an application which downloads the XLNet Large Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_large_imdb
+gdown https://drive.google.com/uc?id=1B11ko7Dzam3ZxaHE_GWhD_uMLK5ZNGpO -O ${SINGULARITY_ROOTFS}/xlnet_large_imdb_model_file.pth
+
+%apprun xlnet_large_imdb
+	echo "Arguments received: $*"
+     	intgrads -xll ${SINGULARITY_ROOTFS}/xlnet_large_imdb_model_file.pth --cpu $* 
+
+####################
+# xlnet_large_yelp #
+####################
+
+%apphelp xlnet_large_yelp
+	This is an application which downloads the XLNet Large Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_large_yelp
+gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/xlnet_large_yelp_model_file.pth
+
+%apprun xlnet_large_yelp
+	echo "Arguments received: $*"
+     	intgrads -xll ${SINGULARITY_ROOTFS}/xlnet_large_yelp_model_file.pth --cpu $* 
+
+#############################
+# xlnet_large_sst_sentences #
+#############################
+
+%apphelp xlnet_large_sst_sentences
+	This is an application which downloads the XLNet Large Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_large_sst_sentences
+gdown https://drive.google.com/uc?id=12qqdcZgb7UUvmzMVR__maUvz1l5ZNLrL -O ${SINGULARITY_ROOTFS}/xlnet_large_sst_sentences_model_file.pth
+
+%apprun xlnet_large_sst_sentences
+	echo "Arguments received: $*"
+     	intgrads -xll ${SINGULARITY_ROOTFS}/xlnet_large_sst_sentences_model_file.pth --cpu $* 
+
+#############################
+# xlnet_large_sst_finetuned #
+#############################
+
+%apphelp xlnet_large_sst_finetuned
+	This is an application which downloads the XLNet Large Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+
+%appinstall xlnet_large_sst_finetuned
+gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/xlnet_large_sst_finetuned_model_file.pth
+
+%apprun xlnet_large_sst_finetuned
+	echo "Arguments received: $*"
+     	intgrads -xll ${SINGULARITY_ROOTFS}/xlnet_large_sst_finetuned_model_file.pth --cpu $* 
