@@ -55,7 +55,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -bp /tmp/bert_imdb_model_file.pth --cpu $*
 	rm /tmp/bert_imdb_model_file.pth
-	touch /tmp/bert_imdb_model_file.pth
 
 #############
 # bert_yelp #
@@ -69,7 +68,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -bp /tmp/bert_yelp_model_file.pth --cpu $*
 	rm /tmp/bert_yelp_model_file.pth
-	touch /tmp/bert_yelp_model_file.pth
 
 ######################
 # bert_sst_sentences #
@@ -83,7 +81,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -bp /tmp/bert_sst_sentences_model_file.pth --cpu $*
 	rm /tmp/bert_sst_sentences_model_file.pth
-	touch /tmp/bert_sst_sentences_model_file.pth
 
 ######################
 # bert_sst_finetuned #
@@ -97,7 +94,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -bp /tmp/bert_sst_finetuned_model_file.pth --cpu $*
 	rm /tmp/bert_sst_finetuned_model_file.pth
-	touch /tmp/bert_sst_finetuned_model_file.pth
 
 ###################
 # xlnet_base_imdb #
@@ -111,7 +107,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xlb /tmp/xlnet_base_imdb_model_file.pth --cpu $*
 	rm /tmp/xlnet_base_imdb_model_file.pth
-	touch /tmp/xlnet_base_imdb_model_file.pth
 
 ###################
 # xlnet_base_yelp #
@@ -125,7 +120,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xlb /tmp/xlnet_base_yelp_model_file.pth --cpu $*
 	rm /tmp/xlnet_base_yelp_model_file.pth
-	touch /tmp/xlnet_base_yelp_model_file.pth
 
 ############################
 # xlnet_base_sst_sentences #
@@ -139,7 +133,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xlb /tmp/xlnet_base_sst_sentences_model_file.pth --cpu $*
 	rm /tmp/xlnet_base_sst_sentences_model_file.pth
-	touch /tmp/xlnet_base_sst_sentences_model_file.pth
 
 ############################
 # xlnet_base_sst_finetuned #
@@ -153,7 +146,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xlb /tmp/xlnet_base_sst_finetuned_model_file.pth --cpu $*
 	rm /tmp/xlnet_base_sst_finetuned_model_file.pth
-	touch /tmp/xlnet_base_sst_finetuned_model_file.pth
 
 ####################
 # xlnet_large_imdb #
@@ -167,7 +159,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xll /tmp/xlnet_large_imdb_model_file.pth --cpu $*
 	rm /tmp/xlnet_large_imdb_model_file.pth
-	touch /tmp/xlnet_large_imdb_model_file.pth
 
 ####################
 # xlnet_large_yelp #
@@ -181,7 +172,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xll /tmp/xlnet_large_yelp_model_file.pth --cpu $*
 	rm /tmp/xlnet_large_yelp_model_file.pth
-	touch /tmp/xlnet_large_yelp_model_file.pth
 
 #############################
 # xlnet_large_sst_sentences #
@@ -195,7 +185,6 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xll /tmp/xlnet_large_sst_sentences_model_file.pth --cpu $*
 	rm /tmp/xlnet_large_sst_sentences_model_file.pth
-	touch /tmp/xlnet_large_sst_sentences_model_file.pth
 
 #############################
 # xlnet_large_sst_finetuned #
@@ -209,4 +198,3 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	echo "Arguments received: $*"
      	intgrads -xll /tmp/xlnet_large_sst_finetuned_model_file.pth --cpu $*
 	rm /tmp/xlnet_large_sst_finetuned_model_file.pth
-	touch /tmp/xlnet_large_sst_finetuned_model_file.pth
