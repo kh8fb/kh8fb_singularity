@@ -24,18 +24,19 @@ where the JSON file has only a 'sequence' field
 
 ### Supported Applications
 Currently there are 12 supported applications that `app_name` can be replaced with:
-	  - `bert_imdb`
-	  - `bert_yelp`
-	  - `bert_sst_sentences`
-	  - `bert_sst_finetuned`
-	  - `xlnet_base_imdb`
-	  - `xlnet_base_yelp`
-	  - `xlnet_base_sst_sentences`
-	  - `xlnet_base_sst_finetuned`
-	  - `xlnet_large_imdb`
-	  - `xlnet_large_yelp`
-	  - `xlnet_large_sst_sentences`
-	  - `xlnet_large_sst_finetuned`
+
+ - `bert_imdb`
+ - `bert_yelp`
+ - `bert_sst_sentences`
+ - `bert_sst_finetuned`
+ - `xlnet_base_imdb`
+  - `xlnet_base_yelp`
+  - `xlnet_base_sst_sentences`
+  - `xlnet_base_sst_finetuned`
+  - `xlnet_large_imdb`
+  - `xlnet_large_yelp`
+  - `xlnet_large_sst_sentences`
+  - `xlnet_large_sst_finetuned`
 
 Receive further information on each of these applications with
 
@@ -43,14 +44,13 @@ Receive further information on each of these applications with
 
 ### Supported Flags
 The possible flags that can currently be specified for these applications are:
-    -`--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif` (required)
-    - `--cuda/--cpu`: whether or not to run on CUDA device (required)
-    - `--num-cuda-devs`: defaults to 1
-    - `--host`: defaults to  `localhost`
-    - `--port`: defaults to  `8888`
+    
 
-
-CUDA support will be added in the future.
+ - `--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif` (required)
+  - `--cuda/--cpu`: whether or not to run on CUDA device (required)
+  - `--num-cuda-devs`: defaults to 1
+  - `--host`: defaults to  `localhost`
+  - `--port`: defaults to  `8888`
 
 ### Running on CUDA
 Simply add the `--nv` flag to enable GPU usage within the singularity container.  Don't forget to specify the number of CUDA devices you want to work with!
@@ -66,4 +66,7 @@ The gradients will then be stored in a dictionary with the keys "integrated_grad
       >>> with gzip.open("saved_file.gzip", 'rb') as fobj:
       >>>      x = BytesIO(fobj.read())
       >>>      grad_dict = torch.load(x)
+
+
+
 
