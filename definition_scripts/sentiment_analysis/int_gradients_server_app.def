@@ -71,7 +71,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 #############
 
 %apphelp bert_imdb
-	This is an application which downloads the BERT Large ITPT Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the BERT Large ITPT Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun bert_imdb
 	echo "Arguments received: $*"
@@ -86,7 +86,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 #############
 
 %apphelp bert_yelp
-	This is an application which downloads the BERT Large ITPT Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the BERT Large ITPT Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun bert_yelp
 	echo "Arguments received: $*"
@@ -101,7 +101,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ######################
 
 %apphelp bert_sst_sentences
-	This is an application which downloads the BERT Large ITPT Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the BERT Large ITPT Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun bert_sst_sentences
 	echo "Arguments received: $*"
@@ -116,7 +116,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ######################
 
 %apphelp bert_sst_finetuned
-	This is an application which downloads the BERT Large ITPT Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the BERT Large ITPT Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun bert_sst_finetuned
 	echo "Arguments received: $*"
@@ -131,7 +131,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ###################
 
 %apphelp xlnet_base_imdb
-	This is an application which downloads the XLNet Base Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Base Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_base_imdb
 	echo "Arguments received: $*"
@@ -147,7 +147,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ###################
 
 %apphelp xlnet_base_yelp
-	This is an application which downloads the XLNet Base Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Base Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_base_yelp
 	echo "Arguments received: $*"
@@ -162,7 +162,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ############################
 
 %apphelp xlnet_base_sst_sentences
-	This is an application which downloads the XLNet Base Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Base Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_base_sst_sentences
 	echo "Arguments received: $*"
@@ -177,7 +177,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ############################
 
 %apphelp xlnet_base_sst_finetuned
-	This is an application which downloads the XLNet Base Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Base Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_base_sst_finetuned
 	echo "Arguments received: $*"
@@ -192,7 +192,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ####################
 
 %apphelp xlnet_large_imdb
-	This is an application which downloads the XLNet Large Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Large Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_large_imdb
 	echo "Arguments received: $*"
@@ -209,7 +209,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 ####################
 
 %apphelp xlnet_large_yelp
-	This is an application which downloads the XLNet Large Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Large Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_large_yelp
 	echo "Arguments received: $*"
@@ -224,7 +224,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 #############################
 
 %apphelp xlnet_large_sst_sentences
-	This is an application which downloads the XLNet Large Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Large Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_large_sst_sentences
 	echo "Arguments received: $*"
@@ -239,7 +239,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
 #############################
 
 %apphelp xlnet_large_sst_finetuned
-	This is an application which downloads the XLNet Large Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
+This is an application which downloads the XLNet Large Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model. Run with singularity run --app app_name int_gradients_server.sif --additional-flags.  The required additional flags are `--cuda/--cpu` and `--baseline`.  Optional additional flags are `--host`, `--port`, and `--num-cuda-devs`. For more information on these flags please see the int-gradients-server documentation or the README.md.
 
 %apprun xlnet_large_sst_finetuned
 	echo "Arguments received: $*"

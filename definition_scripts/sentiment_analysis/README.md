@@ -24,36 +24,38 @@ where the JSON file has only a 'sequence' field
 
 ### Supported Applications
 Currently there are 12 supported applications that `app_name` can be replaced with:
-	  * `bert_imdb`
-	  * `bert_yelp`
-	  * `bert_sst_sentences`
-	  * `bert_sst_finetuned`
-	  * `xlnet_base_imdb`
-	  * `xlnet_base_yelp`
-	  * `xlnet_base_sst_sentences`
-	  * `xlnet_base_sst_finetuned`
-	  * `xlnet_large_imdb`
-	  * `xlnet_large_yelp`
-	  * `xlnet_large_sst_sentences`
-	  * `xlnet_large_sst_finetuned`
+	  *`bert_imdb`
+	  *`bert_yelp`
+	  *`bert_sst_sentences`
+	  *`bert_sst_finetuned`
+	  *`xlnet_base_imdb`
+	  *`xlnet_base_yelp`
+	  *`xlnet_base_sst_sentences`
+	  *`xlnet_base_sst_finetuned`
+	  *`xlnet_large_imdb`
+	  *`xlnet_large_yelp`
+	  *`xlnet_large_sst_sentences`
+	  *`xlnet_large_sst_finetuned`
 
 Receive further information on each of these applications with
 
-	>>> singularity apps --help int_gradients_server.sif
+	>>> singularity run-help --app app_name int_gradients_server.sif
 
 ### Supported Flags
 The possible flags that can currently be specified for these applications are:
-    * `--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif` (required)
-    * `--cuda/--cpu`: whether or not to run on CUDA device (required)
-    * `--num-cuda-devs`: defaults to 1
-    * `--host`: defaults to  `localhost`
-    * `--port`: defaults to  `8888`
+    *`--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif` (required)
+    *`--cuda/--cpu`: whether or not to run on CUDA device (required)
+    *`--num-cuda-devs`: defaults to 1
+    *`--host`: defaults to  `localhost`
+    *`--port`: defaults to  `8888`
 
 
 CUDA support will be added in the future.
 
 ### Running on CUDA
+Simply add the `--nv` flag to enable GPU usage within the singularity container.  Don't forget to specify the number of CUDA devices you want to work with!
 
+       >>> singularity run --app app_name --nv int_gradients_server.sif --cuda --baseline pad --num-cuda-devices 2
 
 ### Obtainining Gradients
 The gradients will then be stored in a dictionary with the keys "integrated_gradients", "intermediate_gradients", "step_sizes", and "intermediates".  They are then compressed and able to be retrieved from the saved gzip file with:
