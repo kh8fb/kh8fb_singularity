@@ -1,13 +1,17 @@
 A collection of singularity container definitions to help you build a singularity container with a sentiment analysis parser.
 
-##Application Usage and Installation
+## Application Usage and Installation
 First, build the image from the definition file
 
-       >>> sudo singularity build int_gradients_server.sif int_gradients_server_app.def
+       >>> sudo singularity build --sandbox int_gradients_server.sif int_gradients_server_app.def
 
-Each of the applications within this container take care of the setup and cleanup process, allowing you to easily set up a server to obtain server results.  Run the application with
+This package includes numerous apps for use cases with different model types.  To see all supported models, see the [Supported Applications section](#supported-applications) To run a specific model, you first have to download it with the `download_model` application.
 
-     >>> singularity run --app app_name int_gradients_server.sif --any_other_flags
+     >>> sudo singularity run -w --app download_model int_gradients_server.sif/ bert_imdb
+
+After downloading a specific model, you can run it as a server with
+
+      >>> singularity run --app bert_imdb int_gradients_server.sif --any_other_flags
      
 You can then curl the integrated gradients results from the running server in another shell window
 
@@ -18,7 +22,7 @@ where the JSON file has only a 'sequence' field
       >>> cat test_json.json
       {"sequence": "This was a terrible movie!"}
 
-###Supported Applications
+### Supported Applications
 Currently there are 12 supported applications that `app_name` can be replaced with:
 	  * `bert_imdb`
 	  * `bert_yelp`
@@ -37,13 +41,19 @@ Receive further information on each of these applications with
 
 	>>> singularity apps --help int_gradients_server.sif
 
-###Supported Flags
+### Supported Flags
 The possible flags that can currently be specified for these applications are:
-    * `--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif`
+    * `--baseline`: one of `pad`, `unk`, `zero`, `period`, `rand-norm`, `rand-unif` (required)
+    * `--cuda/--cpu`: whether or not to run on CUDA device (required)
+    * `--num-cuda-devs`: defaults to 1
     * `--host`: defaults to  `localhost`
     * `--port`: defaults to  `8888`
 
-CUDA support will be supported in the future
+
+CUDA support will be added in the future.
+
+### Running on CUDA
+
 
 ### Obtainining Gradients
 The gradients will then be stored in a dictionary with the keys "integrated_gradients", "intermediate_gradients", "step_sizes", and "intermediates".  They are then compressed and able to be retrieved from the saved gzip file with:

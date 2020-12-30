@@ -4,20 +4,8 @@ MirrorURL: http://ftp.us.debian.org/debian/
 
 %setup
 	# touch all possible files that can be downloaded
-	touch /tmp/bert_imdb_model_file.pth
-	touch /tmp/bert_yelp_model_file.pth
-	touch /tmp/bert_sst_sentences_model_file.pth
-	touch /tmp/bert_sst_finetuned_model_file.pth
-	
-	touch /tmp/xlnet_base_imdb_model_file.pth
-	touch /tmp/xlnet_base_yelp_model_file.pth
-	touch /tmp/xlnet_base_sst_sentences_model_file.pth
-	touch /tmp/xlnet_base_sst_finetuned_model_file.pth
-	
-	touch /tmp/xlnet_large_imdb_model_file.pth
-	touch /tmp/xlnet_large_yelp_model_file.pth
-	touch /tmp/xlnet_large_sst_sentences_model_file.pth
-	touch /tmp/xlnet_large_sst_finetuned_model_file.pth
+	mkdir ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app
+	mkdir ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models
 
 %post
 	#install all necessary python material, remove unnecessary apps
@@ -43,6 +31,41 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	Author kh8fb@virginia.edu
 	Version v0.0.1
 
+##################
+# download_model #
+##################
+
+%apphelp download_model
+	 This is an application that you can use to download the model file for a specific application.  The application will not work if the model has not been downloaded yet.  Run this with `sudo singularity run -w --app download_model int_gradients_server.sif model_name` where model_name is one of bert_imdb, bert_yelp, bert_sst_sentences, bert_sst_finetuned, xlnet_base_imdb, xlnet_base_yelp, xlnet_base_sst_sentences, xlnet_base_sst_finetuned, xlnet_large_imdb, xlnet_large_yelp, xlnet_large_sst_sentences, or xlnet_large_sst_finetuned.
+
+%apprun download_model
+	if [ "$1" = "bert_imdb" ]; then
+	     gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_imdb_model_file.pth
+	elif [ "$1" = "bert_yelp" ]; then
+	     gdown https://drive.google.com/uc?id=1h7jmjlPl6KPqVHhQo9FnVpZtg2h-14-7 -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_yelp_model_file.pth
+	elif [ "$1" = "bert_sst_sentences" ]; then
+	     gdown https://drive.google.com/uc?id=1XSeRl5dHCAabB-gTbhYiZVO3JsA4OixJ -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_sentences_model_file.pth	     
+	elif [ "$1" = "bert_sst_finetuned" ]; then
+	     gdown https://drive.google.com/uc?id=19gRGkWKA4-pOH-TTQG5wEmA2wwtOOFoi -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_finetuned_model_file.pth
+	elif [ "$1" = "xlnet_base_imdb" ]; then
+	     gdown https://drive.google.com/uc?id=1mTfHTA5kdlQLFRtLGZPRTLHTB8nNL-du -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_imdb_model_file.pth
+	elif [ "$1" = "xlnet_base_yelp" ]; then
+	     gdown https://drive.google.com/uc?id=1M63fFr4sAhrZ-mNdIJdU8tRUxhzkeQ7j -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_yelp_model_file.pth
+	elif [ "$1" = "xlnet_base_sst_sentences" ]; then
+	     gdown https://drive.google.com/uc?id=18fr8RLFiakDrFf24Dxsw88Uypqfp0B_b -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_sentences_model_file.pth
+	elif [ "$1" = "xlnet_base_sst_finetuned" ]; then
+	     gdown https://drive.google.com/uc?id=1K7u0nGi5Ecc8g4A8KEgngDpRs6X5n0Dm -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_finetuned_model_file.pth
+	elif [ "$1" = "xlnet_large_imdb" ]; then
+	     gdown https://drive.google.com/uc?id=1B11ko7Dzam3ZxaHE_GWhD_uMLK5ZNGpO -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_imdb_model_file.pth
+	elif [ "$1" = "xlnet_large_yelp" ]; then
+	     gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_yelp_model_file.pth
+	elif [ "$1" = "xlnet_large_sst_sentences" ]; then
+	     gdown https://drive.google.com/uc?id=12qqdcZgb7UUvmzMVR__maUvz1l5ZNLrL -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_sentences_model_file.pth
+	elif [ "$1" = "xlnet_large_sst_finetuned" ]; then
+	     gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_finetuned_model_file.pth
+	fi
+
+
 #############
 # bert_imdb #
 #############
@@ -51,10 +74,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the BERT Large ITPT Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun bert_imdb
-	gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O /tmp/bert_imdb_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -bp /tmp/bert_imdb_model_file.pth --cpu $*
-	rm /tmp/bert_imdb_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_imdb_model_file.pth  ]; then
+     	   intgrads -bp ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_imdb_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 #############
 # bert_yelp #
@@ -64,10 +89,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the BERT Large ITPT Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun bert_yelp
-	gdown https://drive.google.com/uc?id=1h7jmjlPl6KPqVHhQo9FnVpZtg2h-14-7 -O /tmp/bert_yelp_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -bp /tmp/bert_yelp_model_file.pth --cpu $*
-	rm /tmp/bert_yelp_model_file.pth
+	if [ -f  ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_yelp_model_file.pth ]; then
+     	   intgrads -bp ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_yelp_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ######################
 # bert_sst_sentences #
@@ -77,10 +104,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the BERT Large ITPT Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun bert_sst_sentences
-	gdown https://drive.google.com/uc?id=1XSeRl5dHCAabB-gTbhYiZVO3JsA4OixJ -O /tmp/bert_sst_sentences_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -bp /tmp/bert_sst_sentences_model_file.pth --cpu $*
-	rm /tmp/bert_sst_sentences_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_sentences_model_file.pth ]; then
+	     	intgrads -bp ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_sentences_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ######################
 # bert_sst_finetuned #
@@ -90,10 +119,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the BERT Large ITPT Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun bert_sst_finetuned
-	gdown https://drive.google.com/uc?id=19gRGkWKA4-pOH-TTQG5wEmA2wwtOOFoi -O /tmp/bert_sst_finetuned_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -bp /tmp/bert_sst_finetuned_model_file.pth --cpu $*
-	rm /tmp/bert_sst_finetuned_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_finetuned_model_file.pth ]; then
+	     	intgrads -bp ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/bert_sst_finetuned_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ###################
 # xlnet_base_imdb #
@@ -103,10 +134,13 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Base Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_base_imdb
-	gdown https://drive.google.com/uc?id=1mTfHTA5kdlQLFRtLGZPRTLHTB8nNL-du -O /tmp/xlnet_base_imdb_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xlb /tmp/xlnet_base_imdb_model_file.pth --cpu $*
-	rm /tmp/xlnet_base_imdb_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_imdb_model_file.pth ]; then
+     		intgrads -xlb ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_imdb_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
+
 
 ###################
 # xlnet_base_yelp #
@@ -116,10 +150,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Base Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_base_yelp
-	gdown https://drive.google.com/uc?id=1M63fFr4sAhrZ-mNdIJdU8tRUxhzkeQ7j -O /tmp/xlnet_base_yelp_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xlb /tmp/xlnet_base_yelp_model_file.pth --cpu $*
-	rm /tmp/xlnet_base_yelp_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_yelp_model_file.pth ]; then
+     		intgrads -xlb ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_yelp_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ############################
 # xlnet_base_sst_sentences #
@@ -129,10 +165,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Base Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_base_sst_sentences
-	gdown https://drive.google.com/uc?id=18fr8RLFiakDrFf24Dxsw88Uypqfp0B_b -O /tmp/xlnet_base_sst_sentences_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xlb /tmp/xlnet_base_sst_sentences_model_file.pth --cpu $*
-	rm /tmp/xlnet_base_sst_sentences_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_sentences_model_file.pth ]; then
+     		intgrads -xlb ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_sentences_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ############################
 # xlnet_base_sst_finetuned #
@@ -142,10 +180,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Base Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_base_sst_finetuned
-	gdown https://drive.google.com/uc?id=1K7u0nGi5Ecc8g4A8KEgngDpRs6X5n0Dm -O /tmp/xlnet_base_sst_finetuned_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xlb /tmp/xlnet_base_sst_finetuned_model_file.pth --cpu $*
-	rm /tmp/xlnet_base_sst_finetuned_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_finetuned_model_file.pth ]; then
+     		intgrads -xlb ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_base_sst_finetuned_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 ####################
 # xlnet_large_imdb #
@@ -155,10 +195,14 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Large Model trained on the IMDB dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_large_imdb
-	gdown https://drive.google.com/uc?id=1B11ko7Dzam3ZxaHE_GWhD_uMLK5ZNGpO -O /tmp/xlnet_large_imdb_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xll /tmp/xlnet_large_imdb_model_file.pth --cpu $*
-	rm /tmp/xlnet_large_imdb_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_imdb_model_file.pth ]; then
+     		intgrads -xll ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_imdb_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
+
+
 
 ####################
 # xlnet_large_yelp #
@@ -168,10 +212,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Large Model trained on the YELP dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_large_yelp
-	gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O /tmp/xlnet_large_yelp_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xll /tmp/xlnet_large_yelp_model_file.pth --cpu $*
-	rm /tmp/xlnet_large_yelp_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_yelp_model_file.pth ]; then
+     		intgrads -xll ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_yelp_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 #############################
 # xlnet_large_sst_sentences #
@@ -181,10 +227,12 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Large Model trained on the SST Sentences dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_large_sst_sentences
-	gdown https://drive.google.com/uc?id=12qqdcZgb7UUvmzMVR__maUvz1l5ZNLrL -O /tmp/xlnet_large_sst_sentences_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xll /tmp/xlnet_large_sst_sentences_model_file.pth --cpu $*
-	rm /tmp/xlnet_large_sst_sentences_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_sentences_model_file.pth ]; then
+     		intgrads -xll ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_sentences_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
 
 #############################
 # xlnet_large_sst_finetuned #
@@ -194,7 +242,11 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	This is an application which downloads the XLNet Large Model trained on the Stanford Sentiment Treebank dataset and enables the user to receive intermediate gradients from the model.  See the general run-help section for help using each of these applets.
 
 %apprun xlnet_large_sst_finetuned
-	gdown https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa -O /tmp/xlnet_large_sst_finetuned_model_file.pth
 	echo "Arguments received: $*"
-     	intgrads -xll /tmp/xlnet_large_sst_finetuned_model_file.pth --cpu $*
-	rm /tmp/xlnet_large_sst_finetuned_model_file.pth
+	if [ -f ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_finetuned_model_file.pth ]; then
+     		intgrads -xll ${SINGULARITY_ROOTFS}/opt/int_gradients_server_app/models/xlnet_large_sst_finetuned_model_file.pth $*
+	else
+		echo "This model has not been downloaded yet! Download it with download_model"
+	fi
+
+
