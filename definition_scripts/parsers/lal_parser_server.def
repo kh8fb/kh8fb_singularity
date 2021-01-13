@@ -1,0 +1,46 @@
+BootStrap: debootstrap
+OSVersion: buster
+MirrorURL: http://ftp.us.debian.org/debian/
+
+%post
+	#install all necessary python material, remove unnecessary apps
+	apt-get update && apt-get install -y \
+	python3 \
+	python3-pip \
+	git-all \
+
+	pip3 install --upgrade pip
+	# get the intermediate gradients and server git repos
+	git clone https://github.com/kh8fb/LAL-Parser-Server.git
+	cd LAL-Parser-Server
+	pip3 install -r requirements.txt
+	pip3 install -e .
+	cd vocabulary
+	pip3 install -e .
+	# download the google drive file
+	pip3 install gdown
+
+
+%labels
+	Author kh8fb@virginia.edu
+	Version v0.0.1
+
+##################
+# download_model #
+##################
+
+%apphelp download_model
+Download the model file.  Receive further usage information with singularity run --app download_model lal_parser_server.sif -h
+
+%apprun download_model
+	./download_model.sh $*
+
+##############
+# run_server #
+##############
+
+%apphelp run_server
+Set up and run a server with a downloaded model on a designated port.  Receive further information with singularity run --app run_server int_gradients_server.sif -h
+
+%apprun run_server
+	./run_server.sh $*
