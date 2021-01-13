@@ -2,7 +2,7 @@
 ### Bash script for running an int-gradients-server from a singularity container
 
 usage () {
-    echo "Usage: $0 [-f <string>] [additional_args]"
+    echo "Usage: $0 [-f <string>] [lal] [additional_args]"
     echo "Options:"
     echo ""
     echo "-f          Path to the model file"
@@ -13,7 +13,7 @@ usage () {
     echo "--port:                    Port to run server on. Defaults to 8888"
 }
 
-run_server() {
+run_lal() {
     lal-parser-server -mp "$file_path" "$@"
 }
 
@@ -38,6 +38,20 @@ while getopts ":hf:" opt; do
         ;;
     esac
 done
+shift $((OPTIND -1))
 
-"run_server" "$@"
+if [[ -z "$1" ]] ; then
+    SUBCOMMAND="default"
+else
+    SUBCOMMAND="$1"
+    shift 1
+fi
+
+if [[ "$( type -t "run_${SUBCOMMAND}" )" != "function" ]] ; then
+    echo "Invalid command: $SUBCOMMAND"
+    usage
+    exit 1
+fi
+
+"run_${SUBCOMMAND}" "$@"
 exit 0

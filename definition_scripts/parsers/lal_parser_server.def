@@ -10,6 +10,8 @@ MirrorURL: http://ftp.us.debian.org/debian/
 	git-all \
 
 	pip3 install --upgrade pip
+	pip3 install numpy==1.19.5
+	pip3 install cython==0.29.13
 	# get the intermediate gradients and server git repos
 	git clone https://github.com/kh8fb/LAL-Parser-Server.git
 	cd LAL-Parser-Server
