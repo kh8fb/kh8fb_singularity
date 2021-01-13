@@ -5,7 +5,7 @@ First, build the image from the definition file
 
        >>> singularity build --fakeroot lal_parser_server.sif lal_parser_server.def
 
-This container includes two applications, one for downloading the model and the other for setting up a server with the downloaded model. To run a specific model, you first have to download it with the `download_model` application, which will download the model to a specific location on the **host** *outside of the container*. 
+This container includes two applications, one for downloading the model and the other for setting up a server with the downloaded model. To run a specific model, you first have to download it with the `download_model` application, which will download the model to a specific location on the **host** *outside of the container*. Note that this model is 5.2GB.
 
      >>> singularity run --app download_model lal_parser_server.sif -p /path/to/download/location
 
