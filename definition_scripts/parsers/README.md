@@ -11,7 +11,7 @@ This container includes two applications, one for downloading the model and the 
 
 After downloading the model, you can run it as a server with
 
-      >>> singularity run --app run_server lal_parser_server.sif -f /path/to/model.pt lal --any_additional_flags
+      >>> singularity run --app run_server lal_parser_server.sif -f /path/to/model.pt lal --dependency --constituency --any-additional-flags
 
 You can then curl the parsed sentences from the running server in another shell window
 
@@ -22,7 +22,9 @@ where the JSON file has a 'sequences' field filled with 'ids' and the sentences 
       >>> cat test_json.json
       {"sequences": {"1": "This is the first input phrase.","2": "This is the last and final input phrase?"}}
       >>> cat my_output.json
-      {"Dependencies": {"1": "(S (NP (DT This)) (VP (VBZ is) (NP (DT the) (JJ first) (NN input) (NN phrase))) (. .))", "2": "(S (NP (DT This)) (VP (VBZ is) (NP (DT the) (ADJP (JJ last) (CC and) (JJ final)) (NN input) (NN phrase))) (. ?))"}}
+      {"constituencies": {"1": "(S (NP (DT This)) (VP (VBZ is) (NP (DT the) (JJ first) (NN input) (NN phrase))) (. .))", "2": "(S (NP (DT This)) (VP (VBZ is) (NP (DT the) (ADJP (JJ last) (CC and) (JJ final)) (NN input) (NN phrase))) (. ?))"},
+      "dependency labels": {"1": ["nsubj", "cop", "det", "amod", "nn", "root", "punct"], "2": ["nsubj", "cop", "det", "amod", "cc", "conj", "nn", "root", "punct"]},
+      "dependency heads": {"1": [6, 6, 6, 6, 6, 0, 6], "2": [8, 8, 8, 8, 4, 4, 8, 0, 8]}}
 
 As you can tell these IDs are also included in the output, allowing you to easily index the sentences.
 
@@ -32,6 +34,8 @@ The possible flags that can currently be specified for these applications are:
   - `--cuda/--cpu`: whether or not to run on CUDA device (required)
   - `--host`: defaults to  `localhost`
   - `--port`: defaults to  `8888`
+  - `--dependency`: add dependency parsing results to returned JSON
+  - `--constituency`: add constituency parsing results to returned JSON
 
 ### Running on CUDA
 Simply add the `--nv` flag to enable GPU usage within the singularity container.  Don't forget to specify the number of CUDA devices you want to work with!
