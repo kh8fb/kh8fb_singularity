@@ -11,9 +11,12 @@ usage () {
     echo "--cuda/--cpu <required>:   Whether to run the models on cuda or cpu"
     echo "--host:                    Host of the server. Defaults to localhost"
     echo "--port:                    Port to run server on. Defaults to 8888"
+    echo "--dependency:              Put dependency parsing results in final JSON"
+    echo "--constituency:            Put constituency parsing results in final JSON"
 }
 
 run_lal() {
+    echo -mp "$file_path" "$@"
     lal-parser-server -mp "$file_path" "$@"
 }
 
