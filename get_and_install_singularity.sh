@@ -23,8 +23,9 @@ sudo tar -C /usr/local -xzvf go$GO_VERSION.$OS-$ARCH.tar.gz && \ #Extracts the a
 rm go$GO_VERSION.$OS-$ARCH.tar.gz    #Deletes the ``tar`` file
 
 ## Set environment local PATH to go
-  
-echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc && \
+
+echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
+    echo 'export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin' >> ~/.bashrc && \
     source ~/.bashrc
 
 ## Download the Singularity Code for V3.7.0
