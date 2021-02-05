@@ -34,6 +34,6 @@ done
 if [[ -z "${download_path}" ]] ; then
     exit 1
 else
-    gdown "$gdown_lal_link" -O ${download_path}
+    gdown "$gdown_lal_link" -O "${download_path}"
     exit 0
 fi

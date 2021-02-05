@@ -16,7 +16,6 @@ usage () {
 }
 
 run_lal() {
-    echo -mp "$file_path" "$@"
     lal-parser-server -mp "$file_path" "$@"
 }
 

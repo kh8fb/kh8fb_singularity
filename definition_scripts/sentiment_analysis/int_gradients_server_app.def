@@ -1,41 +1,31 @@
-BootStrap: debootstrap
-OSVersion: buster
-MirrorURL: http://ftp.us.debian.org/debian/
-
-%environment
-	# export all model links as environment variables.
-	export gdown_bert_imdb="https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa"
-	export gdown_bert_yelp="https://drive.google.com/uc?id=1h7jmjlPl6KPqVHhQo9FnVpZtg2h-14-7"
-	export gdown_bert_sst_sentences="https://drive.google.com/uc?id=1XSeRl5dHCAabB-gTbhYiZVO3JsA4OixJ"
-	export gdown_bert_sst_finetuned="https://drive.google.com/uc?id=19gRGkWKA4-pOH-TTQG5wEmA2wwtOOFoi"
-	export gdown_xlnet_base_imdb="https://drive.google.com/uc?id=1mTfHTA5kdlQLFRtLGZPRTLHTB8nNL-du"
-	export gdown_xlnet_base_yelp="https://drive.google.com/uc?id=1M63fFr4sAhrZ-mNdIJdU8tRUxhzkeQ7j"
-	export gdown_xlnet_base_sst_sentences="https://drive.google.com/uc?id=18fr8RLFiakDrFf24Dxsw88Uypqfp0B_b"
-	export gdown_xlnet_base_sst_finetuned="https://drive.google.com/uc?id=1K7u0nGi5Ecc8g4A8KEgngDpRs6X5n0Dm"
-	export gdown_xlnet_large_imdb="https://drive.google.com/uc?id=1B11ko7Dzam3ZxaHE_GWhD_uMLK5ZNGpO"
-	export gdown_xlnet_large_yelp="https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa"
-	export gdown_xlnet_large_sst_sentences="https://drive.google.com/uc?id=12qqdcZgb7UUvmzMVR__maUvz1l5ZNLrL"
-	export gdown_xlnet_large_sst_finetuned="https://drive.google.com/uc?id=1R_7SVjETSHs74ff2ita7PrahcFbM1gZa"
+BootStrap: docker
+From: debian:buster-slim
 
 %post
-	#install all necessary python material, remove unnecessary apps
-	apt-get update && apt-get install -y \
-	python3 \
-	python3-pip \
-	git-all \
+    apt-get -y update
+    apt-get -y install --no-install-recommends python3 python3-pip git
 
-	pip3 install --upgrade pip
-	# get the intermediate gradients and server git repos
-	git clone https://github.com/kh8fb/intermediate-gradients.git
-	git clone https://github.com/kh8fb/int-gradients-server.git
-	cd intermediate-gradients
-	pip3 install -e .
-	cd ../int-gradients-server
-	pip3 install -r requirements.txt
-	pip3 install -e .
-	# download the google drive file
-	pip3 install gdown
+    python3 -m pip install --no-cache-dir --upgrade pip setuptools
+    python3 -m pip install --no-cache-dir gdown
 
+    cd /opt
+    git clone --depth 1 https://github.com/kh8fb/intermediate-gradients.git
+    git clone --depth 1 https://github.com/kh8fb/int-gradients-server.git
+
+    cd /opt/intermediate-gradients
+    python3 -m pip install --no-cache-dir -e .
+
+    cd /opt/int-gradients-server
+    python3 -m pip install --no-cache-dir -e .
+    python3 -m pip install --no-cache-dir -r requirements.txt
+
+    apt-get -y purge git
+    apt-get -y clean
+    rm -rf /var/lib/apt/lists/*
+
+%environment
+    export LC_ALL=C
+    export PATH=/usr/games:$PATH
 
 %labels
 	Author kh8fb@virginia.edu
