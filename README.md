@@ -1,5 +1,1 @@
-The get_and_install_singularity.sh script is useful for preparing a system for obtaining and installing singularity to use.  Run it with:
-    sudo ./get_and_install_singularity.sh
-
-## definition_scripts
-A collection of singularity container definition scripts to run and build containers for various NLP tasks including sentiment analysis and sentence parsing.
+A collection of scripts used to create Singularity images for state-of-the-art NLP models.  In the `download_singularity_scripts` are useful scripts for installing singularity onto your computer.  Within the `definition_scripts` folder are several Singularity definition scripts for downloading and producing these singularity images.
