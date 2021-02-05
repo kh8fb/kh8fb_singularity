@@ -1,4 +1,4 @@
-A collection of singularity container definitions to help you build a singularity container with state-of-the-art parsing capabilities.
+A collection of files to help you build a singularity container with state-of-the-art parsing capabilities.  Both constituency and dependency parsing can be performed by this container.
 
 ## Application Usage and Installation
 First, build the image from the definition file
