@@ -4,7 +4,7 @@ From: debian:buster-slim
 %post
 	#install all necessary python material, remove unnecessary apps
     	apt-get -y update
-    	apt-get -y install --no-install-recommends python3 python3-pip git
+    	apt-get -y install --no-install-recommends python3-dev python3-pip git
 
     	python3 -m pip install --no-cache-dir --upgrade pip setuptools
 	python3 -m pip install --no-cache-dir numpy==1.19.5
